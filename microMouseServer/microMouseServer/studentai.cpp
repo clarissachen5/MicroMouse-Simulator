@@ -22,19 +22,7 @@ void microMouseServer::studentAI()
  * void printUI(const char *mesg);
 */
 
-    //my name is Clarissa
-    //fdfdfdsfjdskfdklddf dsfdf
-    //sdfsdsafdsf
-    //sfsfsfrefdvc tgfvtgv rfc edc i like cheese dsfdfsfdnbvc/.,dfgb
-    //vbbfdcrrvcv
-    //dfvcv
-    //today is a saturday on july 31 2021 lalalaalalalaaalaa
-    //blah blah blah blah blah
-    //meh
-    //ddfdsdvccmnbvckjhgfdiuytrew
-    //dsafsdf
-    //dsf cc cvc b f svc  dcc
-    //vsvsdsdds
+
 
 }
 
