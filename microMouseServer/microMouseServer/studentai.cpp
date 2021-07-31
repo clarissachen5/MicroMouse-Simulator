@@ -39,6 +39,18 @@ void microMouseServer::studentAI()
     }
     }
 
+    void onlyOnePath() {
+        if (!isWallLeft() && isWallForward() && isWallRight()) { //only left
+            turnLeft();
+            moveForward();
+        } else if (!isWallForward() && isWallRight()) { //only forward
+            moveForward();
+        } else { //only right
+            turnRight();
+            moveForward();
+        }
+    }
+
 
 }
 
