@@ -51,6 +51,22 @@ void microMouseServer::studentAI()
         }
     }
 
+    void noPath() { //mouse has hit a dead end and there are no possible direction paths except to turn around
+        turnLeft();
+        turnLeft();
+        moveForward();
+    }
+
+    void main(){
+        if (!isWallLeft() && !isWallForward() && !isWallRight()) {
+            threePaths();
+        } else if (!isWallLeft() || !isWallForward() || !isWallRight()){
+            onlyOnePath();
+        } else {
+            noPath();
+            }
+    }
+
 
 }
 
