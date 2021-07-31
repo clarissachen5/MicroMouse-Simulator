@@ -21,7 +21,18 @@ void microMouseServer::studentAI()
  * void foundFinish();
  * void printUI(const char *mesg);
 */
-
+    int goneL = 0; //tracker for # times mouse has gone left path
+    int goneF = 0; //tracker for # times mouse has gone forward path
+    int goneR = 0; //tracker for # times mouse has gone right path
+    if (!isWallLeft()) { //opportunity to move left
+        turnLeft();
+        moveForward();
+    } else if (!isWallForward()) { //opportunity to move forward
+        moveForward();
+    } else { //opportunity to move right
+        turnRight();
+        moveForward();
+    }
 
 
 }
