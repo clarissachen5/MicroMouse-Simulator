@@ -27,11 +27,14 @@ void microMouseServer::studentAI()
     if (!isWallLeft()) { //opportunity to move left
         turnLeft();
         moveForward();
+        goneL += 1;
     } else if (!isWallForward()) { //opportunity to move forward
         moveForward();
+        goneF += 1;
     } else { //opportunity to move right
         turnRight();
         moveForward();
+        goneR += 1;
     }
 
 
