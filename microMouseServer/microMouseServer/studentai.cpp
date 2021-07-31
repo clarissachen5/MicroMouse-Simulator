@@ -49,6 +49,7 @@ void microMouseServer::studentAI()
 
 }
 
+//islanded maze code
 int timesLeft() {
     return 0;
 }
@@ -62,14 +63,32 @@ int timesRight() {
 }
 
 
-if (!isWallLeft() && (timesLeft() <= timesForward() && !isWallForward()) && (timesLeft()<= timesRight() && !isWallRight() ))
+if (!isWallLeft() && (timesLeft() <= timesForward() && !isWallForward()) && (timesLeft()<= timesRight() && !isWallRight()))
 {
     turnLeft();
     moveForward();
 }
 
+else if (!isWallForward() && (timesForward() <= timesRight() && !isWallRight()))
+{
+    moveForward();
+}
+
+else if (!isWallRight())
+{
+    turnRight();
+    moveForward();
+}
+
+else
+{
+    turnRight();
+    turnRight();
+    moveForward();
+}
 
 
+//end of islanded maze code
 
 
 void threePaths()
