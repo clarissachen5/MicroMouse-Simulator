@@ -13,7 +13,9 @@ int timesRight() {
     return 0;
 }
 
-
+int finish() { //counts how many times there are two adjacent walls (need to have three in a row and a single wall to reach the finish)
+    return 0;
+}
 
 
 void microMouseServer::studentAI()
@@ -37,7 +39,24 @@ void microMouseServer::studentAI()
  * void printUI(const char *mesg);
 */
 
-// unislanded maze
+    //code for checking if close to finish
+    if ((isWallLeft() && isWallForward()) ||
+        (isWallForward() && isWallRight()))
+    {
+        finish() += 1;   //increasing finish counter
+    }
+
+    if (finish() == 3 &&
+            ((isWallLeft() && !isWallForward() && !isWallRight()) ||
+             (isWallForward() && !isWallLeft() && !isWallRight()) ||
+             (isWallRight() && !isWallLeft() && !isWallForward())
+             ))
+    {
+        foundFinish();
+        printUI(const char "finished");
+    }
+    //end of code for checking if close to finish
+
 
     if (!isWallLeft() &&
        !(timesLeft() >= timesForward() && !isWallForward()) &&
@@ -67,13 +86,10 @@ void microMouseServer::studentAI()
         turnRight();
         moveForward();
     }
-//end of unislanded maze code
+
 
 
 
 }
 
-//islanded maze code
-
-//end of islanded maze code
 
