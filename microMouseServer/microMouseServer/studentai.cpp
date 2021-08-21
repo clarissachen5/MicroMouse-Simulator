@@ -13,7 +13,11 @@ int timesRight() {
     return 0;
 }
 
-int finish() { //counts how many times there are two adjacent walls (need to have three in a row and a single wall to reach the finish)
+int finishL() { //counts how many times there are two adjacent walls, forward and left, (need to have three in a row and a single wall to reach the finish)
+    return 0;
+}
+
+int finishR() { //counts how many times there are two adjacent walls, forward and right, (need to have three in a row and a single wall to reach the finish)
     return 0;
 }
 
@@ -40,17 +44,43 @@ void microMouseServer::studentAI()
 */
 
     //code for checking if close to finish
-    if ((isWallLeft() && isWallForward()) ||
-        (isWallForward() && isWallRight()))
+    
+    if (isWallLeft() && isWallForward())
+        
     {
-        finish() += 1;   //increasing finish counter
+        finishL() += 1;   //increasing finishL counter
+    }
+    
+    else
+    {
+        finishL() = 0;
+    }
+    
+    if (isWallForward() && isWallRight())
+    {
+        finishR() += 1;
+    }
+    
+    else
+    {
+        finishR() = 0;
     }
 
-    if (finish() == 3 &&
+    if (finishL() == 3 &&
             ((isWallLeft() && !isWallForward() && !isWallRight()) ||
              (isWallForward() && !isWallLeft() && !isWallRight()) ||
              (isWallRight() && !isWallLeft() && !isWallForward())
-             ))
+             )) //check if finishing with walls on the left
+    {
+        foundFinish();
+        printUI(const char "finished");
+    }
+    
+    if (finishR() == 3 &&
+            ((isWallLeft() && !isWallForward() && !isWallRight()) ||
+             (isWallForward() && !isWallLeft() && !isWallRight()) ||
+             (isWallRight() && !isWallLeft() && !isWallForward())
+             )) //check if finishing with walls on the right
     {
         foundFinish();
         printUI(const char "finished");
