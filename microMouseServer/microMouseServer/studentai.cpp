@@ -13,8 +13,7 @@ int timesRight() {
     return 0;
 }
 
-
-
+int countL = 0;
 
 void microMouseServer::studentAI()
 {
@@ -40,11 +39,11 @@ void microMouseServer::studentAI()
     //code for checking if close to finish
     
 
-    int countL = 0;
+
 
     if (countL == 3) { //need three left moves in a row to know finish has been reached
         foundFinish();
-        printUI(const char "finished maze");
+        printUI("finished maze");
     }
 
 
@@ -66,12 +65,14 @@ void microMouseServer::studentAI()
              )
     {
         moveForward();
+        countL = 0;
     }
 
     else if (!isWallRight())
     {
         turnRight();
         moveForward();
+        countL = 0;
     }
 
     else
@@ -79,6 +80,7 @@ void microMouseServer::studentAI()
         turnRight();
         turnRight();
         moveForward();
+        countL = 0;
     }
 
 
