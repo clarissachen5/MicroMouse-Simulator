@@ -41,10 +41,7 @@ void microMouseServer::studentAI()
 
 
 
-    if (countL == 3) { //need three left moves in a row to know finish has been reached
-        foundFinish();
-        printUI("finished maze");
-    }
+
 
 
     //end of code for checking if close to finish
@@ -83,7 +80,10 @@ void microMouseServer::studentAI()
         countL = 0;
     }
 
-
+    if (countL == 3) { //need three left moves in a row to know finish has been reached
+        foundFinish();
+        printUI("finished maze");
+    }
 
 
 }
