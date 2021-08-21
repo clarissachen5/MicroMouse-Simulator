@@ -76,7 +76,21 @@ void microMouseServer::studentAI()
     {
         turnLeft();
         moveForward();
-        xPos -= 1; //mouse goes left so x position decreases by 1
+
+
+        if (mouthDirection == 0) {
+            xPos -= 1; //mouse goes left so x position decreases by 1
+        }
+        if (mouthDirection == 1) {
+            yPos += 1;
+        }
+        if (mouthDirection == 2) {
+            xPos += 1;
+        }
+        if (mouthDirection == 3) {
+            yPos -= 1;
+        }
+
         countL += 1;
         mazeData[xPos][yPos] += 1;
         if (mouthDirection - 1 < 0) {
@@ -92,7 +106,20 @@ void microMouseServer::studentAI()
              )
     {
         moveForward();
-        yPos += 1; //mouse moves forward so y position increases by 1
+
+
+        if (mouthDirection == 0) {
+            yPos += 1;
+        }
+        if (mouthDirection == 1) {
+            xPos += 1;
+        }
+        if (mouthDirection == 2) {
+            yPos -= 1;
+        }
+        if (mouthDirection == 3) {
+            xPos -= 1;
+        }
         countL = 0;
         mazeData[xPos][yPos] += 1;
     }
@@ -101,7 +128,20 @@ void microMouseServer::studentAI()
     {
         turnRight();
         moveForward();
-        xPos += 1; //mouse moves right so x position increases by 1
+
+        if (mouthDirection == 0) {
+            xPos += 1;
+        }
+        if (mouthDirection == 1) {
+            yPos -= 1;
+        }
+        if (mouthDirection == 2) {
+            xPos -= 1;
+        }
+        if (mouthDirection == 3) {
+            yPos += 1;
+        }
+
         countL = 0;
         mazeData[xPos][yPos] += 1;
         if (mouthDirection + 1 > 3) {
@@ -116,15 +156,19 @@ void microMouseServer::studentAI()
     {
         if (mouthDirection == 0) {
             yPos -= 1;
+            mouthDirection = 2;
         }
         if (mouthDirection == 1) {
             xPos -= 1;
+            mouthDirection = 3;
         }
         if (mouthDirection == 2) {
             yPos += 1;
+            mouthDirection = 0;
         }
         if (mouthDirection == 3) {
             xPos += 1;
+            mouthDirection = 1;
         }
 
         turnRight();
