@@ -41,7 +41,29 @@ void microMouseServer::studentAI()
     int mazeData[20][20]; //initialize array
 
 
+    if (mouthDirection == 0) { //setting values for times directions when mouse is facing north
+        timesLeft = mazeData[xPos-1][yPos];
+        timesForward = mazeData[xPos][yPos+1];
+        timesRight = mazeData[xPos+1][yPos];
+    }
 
+    if (mouthDirection == 1) { //setting values for times directions when mouse is facing east
+        timesLeft = mazeData[xPos][yPos+1];
+        timesForward = mazeData[xPos+1][yPos];
+        timesRight = mazeData[xPos][yPos-1];
+    }
+
+    if (mouthDirection == 2) { //setting values for times directions when mouse is facing south
+        timesLeft = mazeData[xPos+1][yPos];
+        timesForward = mazeData[xPos][yPos-1];
+        timesRight = mazeData[xPos-1][yPos];
+    }
+
+    if (mouthDirection == 3) { //setting values for times directions when mouse is facing west
+        timesLeft = mazeData[xPos][yPos-1];
+        timesForward = mazeData[xPos-1][yPos];
+        timesRight = mazeData[xPos][yPos+1];
+    }
 
 
 
