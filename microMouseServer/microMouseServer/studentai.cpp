@@ -1,20 +1,19 @@
 
 #include "micromouseserver.h"
 
-int timesLeft() {
-    return 0;
-}
+int timesLeft = 0;
 
-int timesForward() {
-    return 0;
-}
 
-int timesRight() {
-    return 0;
-}
+int timesForward = 0;
+
+
+int timesRight = 0;
+
 
 int countL = 0;
 
+int xPos = 0; //for keeping tracks of mouse's x position
+int yPos = 0; //for keeping tracks of mouse's y position
 void microMouseServer::studentAI()
 {
 /*
@@ -39,6 +38,7 @@ void microMouseServer::studentAI()
     //code for checking if close to finish
     
 
+    int mazeData[20][20]; //initialize array
 
 
 
@@ -54,6 +54,7 @@ void microMouseServer::studentAI()
     {
         turnLeft();
         moveForward();
+        xPos -= 1; //mouse goes left so x position decreases by 1
         countL += 1;
     }
 
@@ -62,6 +63,7 @@ void microMouseServer::studentAI()
              )
     {
         moveForward();
+        yPos += 1; //mouse moves forward so y position increases by 1
         countL = 0;
     }
 
@@ -69,6 +71,7 @@ void microMouseServer::studentAI()
     {
         turnRight();
         moveForward();
+        xPos += 1; //mouse moves right so x position increases by 1
         countL = 0;
     }
 
