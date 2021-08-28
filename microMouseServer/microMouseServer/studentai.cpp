@@ -1,20 +1,7 @@
 
 #include "micromouseserver.h"
 
-int timesLeft = 0;
 
-
-int timesForward = 0;
-
-
-int timesRight = 0;
-
-
-int countL = 0;
-
-int xPos = 0; //for keeping tracks of mouse's x position
-int yPos = 0; //for keeping tracks of mouse's y position
-int mouthDirection = 0; //tracks direction of mouse, 0 = north, 1 = east, 2 = south, 3 = west
 void microMouseServer::studentAI()
 {
 /*
@@ -37,32 +24,87 @@ void microMouseServer::studentAI()
 */
 
 
+    int timesLeft;
+    int timesForward;
+    int timesRight;
+    static int countL = 0;
 
-    int mazeData[20][20]; //initialize array
+    static int xPos = 0; //for keeping tracks of mouse's x position
+    static int yPos = 0; //for keeping tracks of mouse's y position
+    static int mouthDirection = 0; //tracks direction of mouse, 0 = north, 1 = east, 2 = south, 3 = west
+    static int mazeData[20][20] ={{0}}; //initialize array
 
 
     if (mouthDirection == 0) { //setting values for times directions when mouse is facing north
-        timesLeft = mazeData[(xPos-1)][yPos];
-        timesForward = mazeData[xPos][(yPos+1)];
-        timesRight = mazeData[(xPos+1)][yPos];
+        if (isWallLeft()) {
+            timesLeft = 0;
+        }
+        if (isWallForward()) {
+            timesForward = 0;
+        }
+        if (isWallRight()) {
+            timesRight = 0;
+        }
+        else {
+            timesLeft = mazeData[(xPos-1)][yPos];
+            timesForward = mazeData[xPos][(yPos+1)];
+            timesRight = mazeData[(xPos+1)][yPos];
+        }
     }
 
     if (mouthDirection == 1) { //setting values for times directions when mouse is facing east
-        timesLeft = mazeData[xPos][(yPos+1)];
-        timesForward = mazeData[(xPos+1)][yPos];
-        timesRight = mazeData[xPos][(yPos-1)];
+        if (isWallLeft()) {
+            timesLeft = 0;
+        }
+        if (isWallForward()) {
+            timesForward = 0;
+        }
+        if (isWallRight()) {
+            timesRight = 0;
+        }
+        else {
+            timesLeft = mazeData[xPos][(yPos+1)];
+            timesForward = mazeData[(xPos+1)][yPos];
+            timesRight = mazeData[xPos][(yPos-1)];
+        }
     }
 
     if (mouthDirection == 2) { //setting values for times directions when mouse is facing south
-        timesLeft = mazeData[(xPos+1)][yPos];
-        timesForward = mazeData[xPos][(yPos-1)];
-        timesRight = mazeData[(xPos-1)][yPos];
+        if (isWallLeft()) {
+            timesLeft = 0;
+        }
+        else {
+           timesLeft = mazeData[(xPos+1)][yPos];
+        }
+        if (isWallForward()) {
+            timesForward = 0;
+        }
+        else {
+            timesForward = mazeData[xPos][(yPos-1)];
+        }
+        if (isWallRight()) {
+            timesRight = 0;
+        }
+        else {
+            timesRight = mazeData[(xPos-1)][yPos];
+        }
     }
 
     if (mouthDirection == 3) { //setting values for times directions when mouse is facing west
-        timesLeft = mazeData[xPos][(yPos-1)];
-        timesForward = mazeData[(xPos-1)][yPos];
-        timesRight = mazeData[xPos][(yPos+1)];
+        if (isWallLeft()) {
+            timesLeft = 1000000;
+        }
+        if (isWallForward()) {
+            timesForward = 1000000;
+        }
+        if (isWallRight()) {
+            timesRight = 1000000;
+        }
+        else {
+            timesLeft = mazeData[xPos][(yPos-1)];
+            timesForward = mazeData[(xPos-1)][yPos];
+            timesRight = mazeData[xPos][(yPos+1)];
+        }
     }
 
 
