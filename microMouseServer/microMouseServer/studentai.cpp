@@ -1,7 +1,33 @@
 
 #include "micromouseserver.h"
+void offset(int mouthDirection, int *xPos, int *yPos){
+    if (mouthDirection == 0) {
+        *yPos += 1; //mouse goes left so x position decreases by 1
+    }
+    if (mouthDirection == 1) {
+        *xPos += 1;
+    }
+    if (mouthDirection == 2) {
+        *yPos -= 1;
+    }
+    if (mouthDirection == 3) {
+        *xPos -= 1;
+    }
+}
 
+void turnMouthLeft(int *mouth){
+    *mouth -=1;
+    if(*mouth < 0) {
+        *mouth = 3;
+    }
+}
 
+void turnMouthRight(int *mouth){
+    *mouth += 1;
+    if(*mouth > 3) {
+        *mouth = 0;
+    }
+}
 void microMouseServer::studentAI()
 {
 /*
@@ -37,53 +63,61 @@ void microMouseServer::studentAI()
 
     if (mouthDirection == 0) { //setting values for times directions when mouse is facing north
         if (isWallLeft()) {
-            timesLeft = 0;
-        }
-        if (isWallForward()) {
-            timesForward = 0;
-        }
-        if (isWallRight()) {
-            timesRight = 0;
+            timesLeft = 1000000;
         }
         else {
             timesLeft = mazeData[(xPos-1)][yPos];
-            timesForward = mazeData[xPos][(yPos+1)];
+        }
+        if (isWallForward()) {
+            timesForward = 1000000;
+        }
+        else {
+              timesForward = mazeData[xPos][(yPos+1)];
+        }
+        if (isWallRight()) {
+            timesRight = 1000000;
+        }
+        else {
             timesRight = mazeData[(xPos+1)][yPos];
         }
     }
 
     if (mouthDirection == 1) { //setting values for times directions when mouse is facing east
         if (isWallLeft()) {
-            timesLeft = 0;
-        }
-        if (isWallForward()) {
-            timesForward = 0;
-        }
-        if (isWallRight()) {
-            timesRight = 0;
+            timesLeft = 1000000;
         }
         else {
-            timesLeft = mazeData[xPos][(yPos+1)];
+             timesLeft = mazeData[xPos][(yPos+1)];
+        }
+        if (isWallForward()) {
+            timesForward = 1000000;
+        }
+        else {
             timesForward = mazeData[(xPos+1)][yPos];
+        }
+        if (isWallRight()) {
+            timesRight = 1000000;
+        }
+        else {
             timesRight = mazeData[xPos][(yPos-1)];
         }
     }
 
     if (mouthDirection == 2) { //setting values for times directions when mouse is facing south
         if (isWallLeft()) {
-            timesLeft = 0;
+            timesLeft = 1000000;
         }
         else {
            timesLeft = mazeData[(xPos+1)][yPos];
         }
         if (isWallForward()) {
-            timesForward = 0;
+            timesForward = 1000000;
         }
         else {
             timesForward = mazeData[xPos][(yPos-1)];
         }
         if (isWallRight()) {
-            timesRight = 0;
+            timesRight = 1000000;
         }
         else {
             timesRight = mazeData[(xPos-1)][yPos];
@@ -94,15 +128,19 @@ void microMouseServer::studentAI()
         if (isWallLeft()) {
             timesLeft = 1000000;
         }
+        else {
+            timesLeft = mazeData[xPos][(yPos-1)];
+        }
         if (isWallForward()) {
             timesForward = 1000000;
+        }
+        else {
+            timesForward = mazeData[(xPos-1)][yPos];
         }
         if (isWallRight()) {
             timesRight = 1000000;
         }
-        else {
-            timesLeft = mazeData[xPos][(yPos-1)];
-            timesForward = mazeData[(xPos-1)][yPos];
+        else { 
             timesRight = mazeData[xPos][(yPos+1)];
         }
     }
@@ -118,29 +156,11 @@ void microMouseServer::studentAI()
     {
         turnLeft();
         moveForward();
-
-
-        if (mouthDirection == 0) {
-            xPos -= 1; //mouse goes left so x position decreases by 1
-        }
-        if (mouthDirection == 1) {
-            yPos += 1;
-        }
-        if (mouthDirection == 2) {
-            xPos += 1;
-        }
-        if (mouthDirection == 3) {
-            yPos -= 1;
-        }
-
         countL += 1;
+        turnMouthLeft(&mouthDirection);
+        offset(mouthDirection, &xPos, &yPos);
         mazeData[xPos][yPos] += 1;
-        if (mouthDirection - 1 < 0) {
-            mouthDirection = 3;
-        }
-        else {
-            mouthDirection -= 1;
-        }
+
     }
 
     else if (!isWallForward() &&
@@ -148,21 +168,8 @@ void microMouseServer::studentAI()
              )
     {
         moveForward();
-
-
-        if (mouthDirection == 0) {
-            yPos += 1;
-        }
-        if (mouthDirection == 1) {
-            xPos += 1;
-        }
-        if (mouthDirection == 2) {
-            yPos -= 1;
-        }
-        if (mouthDirection == 3) {
-            xPos -= 1;
-        }
         countL = 0;
+        offset(mouthDirection, &xPos, &yPos);
         mazeData[xPos][yPos] += 1;
     }
 
@@ -170,53 +177,22 @@ void microMouseServer::studentAI()
     {
         turnRight();
         moveForward();
-
-        if (mouthDirection == 0) {
-            xPos += 1;
-        }
-        if (mouthDirection == 1) {
-            yPos -= 1;
-        }
-        if (mouthDirection == 2) {
-            xPos -= 1;
-        }
-        if (mouthDirection == 3) {
-            yPos += 1;
-        }
-
+        turnMouthRight(&mouthDirection);
+        offset(mouthDirection, &xPos, &yPos);
         countL = 0;
         mazeData[xPos][yPos] += 1;
-        if (mouthDirection + 1 > 3) {
-            mouthDirection = 0;
-        }
-        else {
-            mouthDirection += 1;
-        }
     }
 
     else
     {
-        if (mouthDirection == 0) {
-            yPos -= 1;
-            mouthDirection = 2;
-        }
-        if (mouthDirection == 1) {
-            xPos -= 1;
-            mouthDirection = 3;
-        }
-        if (mouthDirection == 2) {
-            yPos += 1;
-            mouthDirection = 0;
-        }
-        if (mouthDirection == 3) {
-            xPos += 1;
-            mouthDirection = 1;
-        }
+        turnRight();
+        turnRight();
+        turnMouthRight(&mouthDirection);
+        turnMouthRight(&mouthDirection);
 
-        turnRight();
-        turnRight();
         moveForward();
         countL = 0;
+        offset(mouthDirection, &xPos, &yPos);
     }
 
     if (countL == 3) { //need three left moves in a row to know finish has been reached
