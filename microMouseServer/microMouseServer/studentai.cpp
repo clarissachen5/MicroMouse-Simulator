@@ -37,53 +37,61 @@ void microMouseServer::studentAI()
 
     if (mouthDirection == 0) { //setting values for times directions when mouse is facing north
         if (isWallLeft()) {
-            timesLeft = 0;
-        }
-        if (isWallForward()) {
-            timesForward = 0;
-        }
-        if (isWallRight()) {
-            timesRight = 0;
+            timesLeft = 1000000;
         }
         else {
             timesLeft = mazeData[(xPos-1)][yPos];
+        }
+        if (isWallForward()) {
+            timesForward = 1000000;
+        }
+        else {
             timesForward = mazeData[xPos][(yPos+1)];
+        }
+        if (isWallRight()) {
+            timesRight = 1000000;
+        }
+        else {
             timesRight = mazeData[(xPos+1)][yPos];
         }
     }
 
     if (mouthDirection == 1) { //setting values for times directions when mouse is facing east
         if (isWallLeft()) {
-            timesLeft = 0;
-        }
-        if (isWallForward()) {
-            timesForward = 0;
-        }
-        if (isWallRight()) {
-            timesRight = 0;
+            timesLeft = 1000000;
         }
         else {
             timesLeft = mazeData[xPos][(yPos+1)];
-            timesForward = mazeData[(xPos+1)][yPos];
+        }
+        if (isWallForward()) {
+            timesForward = 1000000;
+        }
+        else {
+             timesForward = mazeData[(xPos+1)][yPos];
+        }
+        if (isWallRight()) {
+            timesRight = 1000000;
+        }
+        else {  
             timesRight = mazeData[xPos][(yPos-1)];
         }
     }
 
     if (mouthDirection == 2) { //setting values for times directions when mouse is facing south
         if (isWallLeft()) {
-            timesLeft = 0;
+            timesLeft = 1000000;
         }
         else {
            timesLeft = mazeData[(xPos+1)][yPos];
         }
         if (isWallForward()) {
-            timesForward = 0;
+            timesForward = 1000000;
         }
         else {
             timesForward = mazeData[xPos][(yPos-1)];
         }
         if (isWallRight()) {
-            timesRight = 0;
+            timesRight = 1000000;
         }
         else {
             timesRight = mazeData[(xPos-1)][yPos];
@@ -94,15 +102,19 @@ void microMouseServer::studentAI()
         if (isWallLeft()) {
             timesLeft = 1000000;
         }
+        else {
+            timesLeft = mazeData[xPos][(yPos-1)];
+        }
         if (isWallForward()) {
             timesForward = 1000000;
+        }
+        else {
+            timesForward = mazeData[(xPos-1)][yPos];
         }
         if (isWallRight()) {
             timesRight = 1000000;
         }
         else {
-            timesLeft = mazeData[xPos][(yPos-1)];
-            timesForward = mazeData[(xPos-1)][yPos];
             timesRight = mazeData[xPos][(yPos+1)];
         }
     }
